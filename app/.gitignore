@@ -1,0 +1,8 @@
+/build
+
+# Security: Don't commit production secrets
+# Uncomment the line below if you want to keep production API keys private
+# src/prod/application.properties
+
+# Optional: Keep all environment configs private
+# src/*/application.properties

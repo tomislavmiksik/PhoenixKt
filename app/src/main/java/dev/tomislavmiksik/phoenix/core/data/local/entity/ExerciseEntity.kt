@@ -1,0 +1,10 @@
+package dev.tomislavmiksik.phoenix.core.data.local.entity
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "exercises")
+data class ExerciseEntity(
+    @PrimaryKey(autoGenerate = false)
+    val exercisesId: Int
+)
