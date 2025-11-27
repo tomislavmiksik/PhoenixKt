@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
  * This follows the Bitwarden pattern for type-safe navigation.
  */
 @Serializable
-object LoginRoute
+data object LoginRoute
 
 /**
  * Extension function to add the Login destination to the navigation graph.

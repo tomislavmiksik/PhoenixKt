@@ -15,12 +15,17 @@ class HomeViewModel @Inject constructor(
     override fun handleAction(action: HomeAction) {
         when (action) {
             is HomeAction.LogoutButtonClick -> handleLogoutButtonClick()
+            is HomeAction.AboutButtonClick -> handleAboutButtonClick()
         }
     }
 
     private fun handleLogoutButtonClick() {
         // TODO: Call AuthRepository.logout()
         sendEvent(HomeEvent.NavigateToLogin)
+    }
+
+    private fun handleAboutButtonClick() {
+        sendEvent(HomeEvent.NavigateToAbout)
     }
 }
 
@@ -31,8 +36,10 @@ data class HomeState(
 
 sealed class HomeEvent {
     data object NavigateToLogin : HomeEvent()
+    data object NavigateToAbout : HomeEvent()
 }
 
 sealed class HomeAction {
     data object LogoutButtonClick : HomeAction()
+    data object AboutButtonClick : HomeAction()
 }

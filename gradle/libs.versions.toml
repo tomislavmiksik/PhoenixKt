@@ -38,6 +38,9 @@ lifecycle = "2.8.7"
 # KSP (for annotation processing)
 ksp = "2.0.21-1.0.28"
 
+# OSS Licenses
+ossLicenses = "17.1.0"
+
 [libraries]
 # Core Android
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -87,6 +90,9 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+# OSS Licenses
+play-services-oss-licenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "ossLicenses" }
 
 
 [plugins]

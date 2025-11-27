@@ -5,27 +5,31 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import dev.tomislavmiksik.phoenix.core.data.local.converters.DateConverter
+import dev.tomislavmiksik.phoenix.core.data.local.converters.LocalDateTimeConverter
 import dev.tomislavmiksik.phoenix.core.data.local.dao.ExerciseDao
+import dev.tomislavmiksik.phoenix.core.data.local.dao.MeasurementDao
 import dev.tomislavmiksik.phoenix.core.data.local.dao.ProgressPointDao
 import dev.tomislavmiksik.phoenix.core.data.local.entity.ExerciseEntity
+import dev.tomislavmiksik.phoenix.core.data.local.entity.MeasurementEntity
 import dev.tomislavmiksik.phoenix.core.data.local.entity.ProgressPoint
 
 @Database(
     entities = [
         ExerciseEntity::class,
         ProgressPoint::class,
+        MeasurementEntity::class,
     ],
     version = DatabaseMigrations.DB_VERSION,
     exportSchema = false
 )
 @TypeConverters(
-    DateConverter::class,
+    LocalDateTimeConverter::class,
 
 )
 abstract class PhoenixDatabase : RoomDatabase() {
     abstract fun getExerciseDao(): ExerciseDao
-    abstract  fun getProgressPointDao() : ProgressPointDao
+    abstract fun getProgressPointDao(): ProgressPointDao
+    abstract fun getMeasurementDao(): MeasurementDao
 
     companion object {
         private const val DB_NAME = "phoenix_database"
