@@ -3,12 +3,21 @@ package dev.tomislavmiksik.phoenix.ui.main
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
+import dev.tomislavmiksik.phoenix.ui.about.aboutDestination
 import dev.tomislavmiksik.phoenix.ui.home.HomeRoute
 import dev.tomislavmiksik.phoenix.ui.home.homeDestination
+import kotlinx.serialization.Serializable
+
+/**
+ * Type-safe route for the main navigation graph.
+ * Using @Serializable data object for modern type-safe navigation.
+ */
+@Serializable
+data object MainGraph
+
 
 /**
  * Main navigation graph containing authenticated user screens.
- * This follows the Bitwarden pattern for nested navigation graphs.
  */
 fun NavGraphBuilder.mainGraph(
     onLogout: () -> Unit,
@@ -19,26 +28,20 @@ fun NavGraphBuilder.mainGraph(
     ) {
         homeDestination(
             onNavigateToLogin = onLogout,
+            onNavigateToAbout = {
+                navController.navigate(dev.tomislavmiksik.phoenix.ui.about.AboutRoute)
+            },
+        )
+
+        aboutDestination(
+            onNavigateBack = {
+                navController.navigateUp()
+            },
         )
 
         // Add more main screens here (e.g., WorkoutList, Profile, Settings)
         // workoutListDestination(...)
         // profileDestination(...)
         // settingsDestination(...)
-    }
-}
-
-/**
- * Root route for the main navigation graph.
- */
-const val MAIN_GRAPH_ROUTE = "main"
-
-/**
- * Sealed class representing the main graph route.
- * Using a sealed class allows for type-safe navigation at the graph level.
- */
-sealed class MainGraph {
-    companion object {
-        const val route = MAIN_GRAPH_ROUTE
     }
 }

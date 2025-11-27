@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.parcelize)
+    id("com.google.android.gms.oss-licenses-plugin")
 }
 
 fun getPropertiesFile(flavor: String): File {
@@ -156,6 +157,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
+
+    // OSS Licenses
+    implementation(libs.play.services.oss.licenses)
 
     // Testing
     testImplementation(libs.junit)

@@ -17,6 +17,7 @@ import dev.tomislavmiksik.phoenix.ui.platform.base.util.EventsEffect
 @Composable
 fun HomeScreen(
     onNavigateToLogin: () -> Unit,
+    onNavigateToAbout: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.stateFlow.collectAsStateWithLifecycle()
@@ -24,12 +25,14 @@ fun HomeScreen(
     EventsEffect(viewModel = viewModel) { event ->
         when (event) {
             is HomeEvent.NavigateToLogin -> onNavigateToLogin()
+            is HomeEvent.NavigateToAbout -> onNavigateToAbout()
         }
     }
 
     HomeScreenContent(
         state = state,
         onLogoutClick = { viewModel.trySendAction(HomeAction.LogoutButtonClick) },
+        onAboutClick = { viewModel.trySendAction(HomeAction.AboutButtonClick) },
     )
 }
 
@@ -37,6 +40,7 @@ fun HomeScreen(
 private fun HomeScreenContent(
     state: HomeState,
     onLogoutClick: () -> Unit,
+    onAboutClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -80,6 +84,15 @@ private fun HomeScreenContent(
         }
 
         Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = onAboutClick,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("About & Licenses")
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedButton(
             onClick = onLogoutClick,

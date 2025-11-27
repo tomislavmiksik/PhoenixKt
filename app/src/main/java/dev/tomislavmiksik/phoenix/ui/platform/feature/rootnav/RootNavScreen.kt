@@ -13,9 +13,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import dev.tomislavmiksik.phoenix.ui.auth.AUTH_GRAPH_ROUTE
+import dev.tomislavmiksik.phoenix.ui.auth.AuthGraph
 import dev.tomislavmiksik.phoenix.ui.auth.authGraph
-import dev.tomislavmiksik.phoenix.ui.main.MAIN_GRAPH_ROUTE
+import dev.tomislavmiksik.phoenix.ui.main.MainGraph
 import dev.tomislavmiksik.phoenix.ui.main.mainGraph
 
 /**
@@ -51,14 +51,14 @@ private fun RootNavScreen(
     LaunchedEffect(rootNavState) {
         when (rootNavState) {
             RootNavState.Auth -> {
-                navController.navigate(AUTH_GRAPH_ROUTE) {
+                navController.navigate(AuthGraph) {
                     // Clear back stack when navigating to auth
                     popUpTo(0) { inclusive = true }
                     launchSingleTop = true
                 }
             }
             RootNavState.Main -> {
-                navController.navigate(MAIN_GRAPH_ROUTE) {
+                navController.navigate(MainGraph) {
                     // Clear back stack when navigating to main
                     popUpTo(0) { inclusive = true }
                     launchSingleTop = true
@@ -84,7 +84,7 @@ private fun RootNavScreen(
             // Set up navigation graph
             NavHost(
                 navController = navController,
-                startDestination = AUTH_GRAPH_ROUTE, // Default start, will be overridden by LaunchedEffect
+                startDestination = AuthGraph, // Default start, will be overridden by LaunchedEffect
             ) {
                 authGraph(
                     onLoginSuccess = onLoginSuccess,

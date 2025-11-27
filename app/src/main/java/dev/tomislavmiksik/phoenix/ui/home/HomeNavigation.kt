@@ -10,17 +10,19 @@ import kotlinx.serialization.Serializable
  * Type-safe route for Home screen using Kotlin Serialization.
  */
 @Serializable
-object HomeRoute
+data object HomeRoute
 
 /**
  * Extension function to add the Home destination to the navigation graph.
  */
 fun NavGraphBuilder.homeDestination(
     onNavigateToLogin: () -> Unit,
+    onNavigateToAbout: () -> Unit,
 ) {
     composable<HomeRoute> {
         HomeScreen(
             onNavigateToLogin = onNavigateToLogin,
+            onNavigateToAbout = onNavigateToAbout,
         )
     }
 }
