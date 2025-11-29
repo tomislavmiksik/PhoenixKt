@@ -1,9 +1,12 @@
 package dev.tomislavmiksik.phoenix.ui.login
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -26,6 +29,7 @@ fun LoginScreen(
     EventsEffect(viewModel = viewModel) { event ->
         when (event) {
             is LoginEvent.NavigateToHome -> onNavigateToHome()
+            else -> {}
         }
     }
 
@@ -38,16 +42,21 @@ fun LoginScreen(
 }
 
 @Composable
+@Suppress("LongMethod")
 private fun LoginScreenContent(
     state: LoginState,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .padding(24.dp)
+            .verticalScroll(scrollState)
+            .imePadding(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

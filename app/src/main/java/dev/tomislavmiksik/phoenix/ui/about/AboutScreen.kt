@@ -1,5 +1,6 @@
 package dev.tomislavmiksik.phoenix.ui.about
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@Suppress("LongMethod")
 fun AboutScreen(
     onNavigateBack: () -> Unit,
 ) {
@@ -64,7 +66,8 @@ fun AboutScreen(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Track your fitness journey with Phoenix. Monitor workouts, track progress, and achieve your goals.",
+                        text = "Track your fitness journey with Phoenix. " +
+                                "Monitor workouts, track progress, and achieve your goals.",
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -83,7 +86,8 @@ fun AboutScreen(
                         style = MaterialTheme.typography.titleMedium,
                     )
                     Text(
-                        text = "This app is built with open source software. We're grateful to the open source community.",
+                        text = "This app is built with open source software. " +
+                                "We're grateful to the open source community.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

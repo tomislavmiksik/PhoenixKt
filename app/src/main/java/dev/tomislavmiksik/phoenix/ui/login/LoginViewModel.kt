@@ -85,6 +85,7 @@ data class LoginState(
 
 sealed class LoginEvent {
     data object NavigateToHome : LoginEvent()
+    data object  NavigateToRegister: LoginEvent()
 }
 
 sealed class LoginAction {

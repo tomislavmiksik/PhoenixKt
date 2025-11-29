@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.detekt)
     id("com.google.android.gms.oss-licenses-plugin")
 }
 
@@ -165,4 +166,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+// Detekt Configuration
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom("$projectDir/../detekt.yml")
+    baseline = file("$projectDir/detekt-baseline.xml")
+
+    source.setFrom(
+        "src/main/java",
+        "src/test/java",
+        "src/androidTest/java"
+    )
 }

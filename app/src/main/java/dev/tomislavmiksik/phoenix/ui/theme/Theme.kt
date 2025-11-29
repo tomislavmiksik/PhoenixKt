@@ -1,44 +1,64 @@
 package dev.tomislavmiksik.phoenix.ui.theme
 
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
-
+/**
+ * Light color scheme with orange (#FF8427) as the primary color.
+ * This app uses light mode only.
+ */
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    // Primary colors - Orange (#FF8427)
+    primary = Orange,
+    onPrimary = Color.White,
+    primaryContainer = OrangeLight,
+    onPrimaryContainer = OrangeDark,
+
+    // Secondary colors - Blue Grey
+    secondary = BlueGrey,
+    onSecondary = Color.White,
+    secondaryContainer = BlueGreyLight,
+    onSecondaryContainer = BlueGreyDark,
+
+    // Tertiary colors - Amber
+    tertiary = Amber,
+    onTertiary = DarkGrey,
+    tertiaryContainer = AmberLight,
+    onTertiaryContainer = AmberDark,
+
+    // Error colors
+    error = Color(0xFFB00020),
+    onError = Color.White,
+    errorContainer = Color(0xFFFFDAD4),
+    onErrorContainer = Color(0xFF410002),
+
+    // Background colors
+    background = Color.White,
+    onBackground = DarkGrey,
+
+    // Surface colors
+    surface = Color.White,
+    onSurface = DarkGrey,
+    surfaceVariant = LightGrey,
+    onSurfaceVariant = NeutralGrey,
+
+    // Outline
+    outline = NeutralGrey,
+    outlineVariant = LightGrey,
 )
 
+/**
+ * Phoenix theme with light mode only.
+ * Uses orange (#FF8427) as the primary brand color.
+ */
 @Composable
 fun PhoenixTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = LightColorScheme,
         typography = Typography,
         content = content
     )
