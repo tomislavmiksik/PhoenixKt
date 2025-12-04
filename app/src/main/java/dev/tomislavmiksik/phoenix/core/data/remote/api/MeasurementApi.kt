@@ -6,31 +6,31 @@ import retrofit2.http.*
 
 interface MeasurementApi {
 
-    @GET("api/measurements")
+    @GET("/measurements")
     suspend fun getAllMeasurements(): List<MeasurementResponseDto>
 
-    @GET("api/measurements/recent")
+    @GET("/measurements/recent")
     suspend fun getRecentMeasurements(
         @Query("limit") limit: Int = 10
     ): List<MeasurementResponseDto>
 
-    @GET("api/measurements/{id}")
+    @GET("/measurements/{id}")
     suspend fun getMeasurementById(
         @Path("id") id: Long
     ): MeasurementResponseDto
 
-    @POST("api/measurements")
+    @POST("/measurements")
     suspend fun createMeasurement(
         @Body request: MeasurementRequestDto
     ): MeasurementResponseDto
 
-    @PUT("api/measurements/{id}")
+    @PUT("/measurements/{id}")
     suspend fun updateMeasurement(
         @Path("id") id: Long,
         @Body request: MeasurementRequestDto
     ): MeasurementResponseDto
 
-    @DELETE("api/measurements/{id}")
+    @DELETE("/measurements/{id}")
     suspend fun deleteMeasurement(
         @Path("id") id: Long
     )

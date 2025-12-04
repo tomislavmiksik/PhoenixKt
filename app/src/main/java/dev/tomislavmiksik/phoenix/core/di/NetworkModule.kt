@@ -6,9 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.tomislavmiksik.phoenix.core.config.AppConfig
+import dev.tomislavmiksik.phoenix.core.data.remote.api.AuthApi
 import dev.tomislavmiksik.phoenix.core.data.remote.api.MeasurementApi
-import dev.tomislavmiksik.phoenix.core.data.remote.service.MeasurementService
-import dev.tomislavmiksik.phoenix.core.data.remote.service.MeasurementServiceImpl
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -61,7 +60,7 @@ object NetworkModule {
         return Interceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
-                .addHeader("Authorization", "Bearer ${appConfig.apiKey}")
+                .addHeader("X-API-KEY", appConfig.apiKey)
                 .addHeader("Content-Type", "application/json")
                 .build()
             chain.proceed(request)
@@ -82,17 +81,13 @@ object NetworkModule {
             .build()
     }
 
-     @Provides
-     @Singleton
-     fun provideWorkoutApi(retrofit: Retrofit): MeasurementApi {
-         return retrofit.create(MeasurementApi::class.java)
-     }
+    @Provides
+    @Singleton
+    fun provideMeasurementsApi(retrofit: Retrofit): MeasurementApi =
+        retrofit.create(MeasurementApi::class.java)
 
     @Provides
     @Singleton
-    fun provideMeasurementService(
-        measurementApi: MeasurementApi
-    ): MeasurementService {
-        return MeasurementServiceImpl(measurementApi)
-    }
+    fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+
 }

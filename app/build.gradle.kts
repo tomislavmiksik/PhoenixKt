@@ -1,5 +1,5 @@
-import java.util.Properties
 import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -14,7 +14,7 @@ plugins {
 }
 
 fun getPropertiesFile(flavor: String): File {
-    return file("app/env/$flavor/application.properties")
+    return file("env/$flavor/application.properties")
 }
 
 fun loadProperties(file: File): Properties {
@@ -51,25 +51,24 @@ android {
             versionNameSuffix = "-dev"
             resValue("string", "app_name", "Phoenix Dev")
 
-            val apiUrl = devProperties.getProperty("dev.api.baseUrl")
-            ?: devProperties.getProperty("api.baseUrl")
-            ?: "https://dev-api.example.com/"
+            val apiUrl = devProperties.getProperty("api.base.url")
+                ?: "https://dev-api.example.com/"
 
             buildConfigField("String", "API_BASE_URL", "\"$apiUrl\"")
 
-            val apiKey = devProperties.getProperty("dev.api.key")
+            val apiKey = devProperties.getProperty("api.key")
                 ?: devProperties.getProperty("api.key")
                 ?: ""
 
             buildConfigField("String", "API_KEY", "\"$apiKey\"")
 
-            val debugMode = devProperties.getProperty("dev.debug.mode")
+            val debugMode = devProperties.getProperty("debug.mode")
                 ?: devProperties.getProperty("debug.mode")
                 ?: false
 
             buildConfigField("Boolean", "DEBUG_MODE", "$debugMode")
 
-            val networkTimeout = devProperties.getProperty("dev.network.timeout")
+            val networkTimeout = devProperties.getProperty("network.timeout")
                 ?: devProperties.getProperty("network.timeout")
                 ?: 30
 

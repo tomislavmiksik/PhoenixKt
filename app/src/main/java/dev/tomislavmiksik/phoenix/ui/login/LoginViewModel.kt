@@ -3,8 +3,8 @@ package dev.tomislavmiksik.phoenix.ui.login
 import android.os.Parcelable
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.tomislavmiksik.phoenix.core.domain.repository.AuthRepository
 import dev.tomislavmiksik.phoenix.ui.base.BaseViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
@@ -12,14 +12,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    // TODO: Inject AuthRepository when available
+    val authRepository: AuthRepository,
 ) : BaseViewModel<LoginState, LoginEvent, LoginAction>(
-    initialState = LoginState(
-        email = "",
-        password = "",
-        isLoading = false,
-        errorMessage = null,
-    )
+    initialState = LoginState.debug()
 ) {
     override fun handleAction(action: LoginAction) {
         when (action) {
@@ -44,16 +39,23 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun handleLoginButtonClick() {
-        // Update state to loading
         mutableStateFlow.update { it.copy(isLoading = true, errorMessage = null) }
 
-        // Simulate login API call
         viewModelScope.launch {
-            delay(1500) // Simulate network delay
-
-            // TODO: Replace with actual authentication logic
             if (state.email.isNotEmpty() && state.password.isNotEmpty()) {
-                sendAction(LoginAction.Internal.LoginSuccess)
+                authRepository.login(
+                    email = state.email.trim(),
+                    password = state.password
+                ).fold(
+                    onSuccess = { token ->
+                        sendAction(LoginAction.Internal.LoginSuccess)
+                    },
+                    onFailure = { exception ->
+                        val errorMessage = exception.message ?: "Unknown error occurred"
+                        sendAction(LoginAction.Internal.LoginError(errorMessage))
+                    }
+                )
+
             } else {
                 sendAction(LoginAction.Internal.LoginError("Please enter email and password"))
             }
@@ -81,11 +83,27 @@ data class LoginState(
 ) : Parcelable {
     val isLoginEnabled: Boolean
         get() = !isLoading && email.isNotEmpty() && password.isNotEmpty()
+
+    companion object HelperStates {
+        fun empty(): LoginState = LoginState(
+            email = "",
+            password = "",
+            isLoading = false,
+            errorMessage = null,
+        )
+
+        fun debug(): LoginState = LoginState(
+            email = "test@user.com",
+            password = "user123",
+            isLoading = false,
+            errorMessage = null,
+        )
+    }
 }
 
 sealed class LoginEvent {
     data object NavigateToHome : LoginEvent()
-    data object  NavigateToRegister: LoginEvent()
+    data object NavigateToRegister : LoginEvent()
 }
 
 sealed class LoginAction {
