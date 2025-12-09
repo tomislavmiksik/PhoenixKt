@@ -1,9 +1,10 @@
-package dev.tomislavmiksik.phoenix.ui.login
+package dev.tomislavmiksik.phoenix.ui.auth.login
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import dev.tomislavmiksik.phoenix.ui.auth.register.RegisterRoute
 import kotlinx.serialization.Serializable
 
 /**
@@ -19,20 +20,18 @@ data object LoginRoute
  */
 fun NavGraphBuilder.loginDestination(
     onNavigateToHome: () -> Unit,
+    onNavigateToRegister: () -> Unit,
 ) {
     composable<LoginRoute> {
         LoginScreen(
             onNavigateToHome = onNavigateToHome,
+            onNavigateToRegister = onNavigateToRegister,
         )
     }
 }
 
-/**
- * Extension function to navigate to the Login screen.
- * This follows the Bitwarden pattern of creating type-safe NavController extensions.
- */
-fun NavController.navigateToLogin(
-    navOptions: NavOptions? = null,
+fun NavController.navigateToRegister(
+    navOptions: NavOptions? = null
 ) {
-    this.navigate(route = LoginRoute, navOptions = navOptions)
+    this.navigate(route = RegisterRoute, navOptions = navOptions)
 }

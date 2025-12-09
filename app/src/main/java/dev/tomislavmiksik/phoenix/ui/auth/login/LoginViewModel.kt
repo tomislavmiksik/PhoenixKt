@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.phoenix.ui.login
+package dev.tomislavmiksik.phoenix.ui.auth.login
 
 import android.os.Parcelable
 import androidx.lifecycle.viewModelScope
@@ -24,6 +24,7 @@ class LoginViewModel @Inject constructor(
             is LoginAction.LoginButtonClick -> handleLoginButtonClick()
             is LoginAction.Internal.LoginSuccess -> handleLoginSuccess()
             is LoginAction.Internal.LoginError -> handleLoginError(action)
+            is LoginAction.RegisterButtonClick -> handleRegisterButtonClick()
         }
     }
 
@@ -77,6 +78,10 @@ class LoginViewModel @Inject constructor(
             it.copy(isLoading = false, errorMessage = action.message)
         }
     }
+
+    private fun handleRegisterButtonClick() {
+        sendEvent(LoginEvent.NavigateToRegister)
+    }
 }
 
 @Parcelize
@@ -98,8 +103,8 @@ data class LoginState(
         )
 
         val debug: LoginState = LoginState(
-            username = "user123",
-            password = "user123",
+            username = "user1234",
+            password = "user1234",
             isLoading = false,
             errorMessage = null,
         )
@@ -115,6 +120,8 @@ sealed class LoginAction {
     data class UsernameChanged(val email: String) : LoginAction()
     data class PasswordChanged(val password: String) : LoginAction()
     data object LoginButtonClick : LoginAction()
+    data object RegisterButtonClick : LoginAction()
+
 
     sealed class Internal : LoginAction() {
         data object LoginSuccess : Internal()

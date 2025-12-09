@@ -20,7 +20,7 @@ data class LoginResponseDto(
     val jwtToken: String,
 
     @SerialName("id")
-    val userId: String,
+    val userId: Integer,
 
     @SerialName("username")
     val username: String,

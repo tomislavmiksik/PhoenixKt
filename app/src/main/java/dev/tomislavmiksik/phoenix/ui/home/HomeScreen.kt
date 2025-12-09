@@ -1,11 +1,23 @@
 package dev.tomislavmiksik.phoenix.ui.home
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -26,6 +38,7 @@ fun HomeScreen(
         when (event) {
             is HomeEvent.NavigateToLogin -> onNavigateToLogin()
             is HomeEvent.NavigateToAbout -> onNavigateToAbout()
+            else -> {}
         }
     }
 
@@ -97,8 +110,24 @@ private fun HomeScreenContent(
         OutlinedButton(
             onClick = onLogoutClick,
             modifier = Modifier.fillMaxWidth(),
+            enabled = !state.isLoading,
         ) {
-            Text("Logout")
+            if (state.isLoading) {
+                CircularProgressIndicator()
+            } else {
+                Text("Logout")
+            }
+        }
+
+        state.errorMessage?.let { error ->
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = error,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }

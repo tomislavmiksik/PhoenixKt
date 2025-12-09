@@ -5,6 +5,7 @@ import dev.tomislavmiksik.phoenix.core.data.remote.api.AuthApi
 import dev.tomislavmiksik.phoenix.core.data.remote.dto.LoginRequestDto
 import dev.tomislavmiksik.phoenix.core.data.remote.dto.LoginResponseDto
 import dev.tomislavmiksik.phoenix.core.domain.repository.AuthRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class AuthRepositoryImpl @Inject constructor(
@@ -28,6 +29,11 @@ internal class AuthRepositoryImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+    override fun getAuthFlowState(): Flow<String?> {
+        return dataSource.getJwtTokenFlow()
+    }
+
 
     override suspend fun isAuthenticated(): Boolean {
         return dataSource.getJwtToken() != null

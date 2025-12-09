@@ -21,9 +21,7 @@ import dev.tomislavmiksik.phoenix.ui.main.mainGraph
 /**
  * Root navigation screen that manages state-based navigation between
  * top-level flows (Auth and Main).
- *
- * This follows the Bitwarden pattern where navigation state is derived
- * from data layer state rather than manual navigation calls.
+
  */
 @Composable
 fun RootNavScreen(
@@ -47,25 +45,37 @@ private fun RootNavScreen(
     onLoginSuccess: () -> Unit,
     onLogout: () -> Unit,
 ) {
-    // Navigate based on state changes
+    // Navigate based on state changes (after initial load)
     LaunchedEffect(rootNavState) {
-        when (rootNavState) {
-            RootNavState.Auth -> {
-                navController.navigate(AuthGraph) {
-                    // Clear back stack when navigating to auth
-                    popUpTo(0) { inclusive = true }
-                    launchSingleTop = true
+        // Skip navigation if we're still loading or if this is the initial composition
+        // The startDestination will handle the initial state
+        if (rootNavState == RootNavState.Loading) return@LaunchedEffect
+
+        // Only navigate if the current destination doesn't match the desired state
+        val currentRoute = navController.currentBackStackEntry?.destination?.route
+        val shouldNavigate = when (rootNavState) {
+            RootNavState.Auth -> currentRoute != AuthGraph::class.qualifiedName
+            RootNavState.Main -> currentRoute != MainGraph::class.qualifiedName
+            RootNavState.Loading -> false
+        }
+
+        if (shouldNavigate) {
+            when (rootNavState) {
+                RootNavState.Auth -> {
+                    navController.navigate(AuthGraph) {
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
-            }
-            RootNavState.Main -> {
-                navController.navigate(MainGraph) {
-                    // Clear back stack when navigating to main
-                    popUpTo(0) { inclusive = true }
-                    launchSingleTop = true
+
+                RootNavState.Main -> {
+                    navController.navigate(MainGraph) {
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
-            }
-            RootNavState.Loading -> {
-                // Stay on loading, NavHost will show initial route
+
+                RootNavState.Loading -> {}
             }
         }
     }
@@ -80,17 +90,23 @@ private fun RootNavScreen(
                 CircularProgressIndicator()
             }
         }
+
         else -> {
-            // Set up navigation graph
+            // Set up navigation graph with dynamic start destination
+            val startDestination = when (rootNavState) {
+                RootNavState.Auth -> AuthGraph
+                RootNavState.Main -> MainGraph
+                RootNavState.Loading -> AuthGraph // Fallback (shouldn't reach here)
+            }
+
             NavHost(
                 navController = navController,
-                startDestination = AuthGraph, // Default start, will be overridden by LaunchedEffect
+                startDestination = startDestination,
             ) {
                 authGraph(
                     onLoginSuccess = onLoginSuccess,
                     navController = navController,
                 )
-
                 mainGraph(
                     onLogout = onLogout,
                     navController = navController,

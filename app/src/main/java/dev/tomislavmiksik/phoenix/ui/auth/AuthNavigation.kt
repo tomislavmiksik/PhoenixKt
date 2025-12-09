@@ -3,8 +3,11 @@ package dev.tomislavmiksik.phoenix.ui.auth
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
-import dev.tomislavmiksik.phoenix.ui.login.LoginRoute
-import dev.tomislavmiksik.phoenix.ui.login.loginDestination
+import dev.tomislavmiksik.phoenix.ui.auth.login.LoginRoute
+import dev.tomislavmiksik.phoenix.ui.auth.login.loginDestination
+import dev.tomislavmiksik.phoenix.ui.auth.login.navigateToRegister
+import dev.tomislavmiksik.phoenix.ui.auth.register.navigateToLogin
+import dev.tomislavmiksik.phoenix.ui.auth.register.registerDestination
 import kotlinx.serialization.Serializable
 
 
@@ -27,10 +30,24 @@ fun NavGraphBuilder.authGraph(
     ) {
         loginDestination(
             onNavigateToHome = onLoginSuccess,
+            onNavigateToRegister = {
+                navController.navigateToRegister(
+                    navOptions = androidx.navigation.navOptions {
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                )
+            },
         )
-
-        // Add more auth screens here (e.g., Register, ForgotPassword)
-        // registerDestination(...)
-        // forgotPasswordDestination(...)
+        registerDestination(
+            onNavigateToHome = onLoginSuccess,
+            onNavigateToLogin = {
+                navController.navigateToLogin(
+                    navOptions = androidx.navigation.navOptions {
+                        launchSingleTop = true
+                    }
+                )
+            },
+        )
     }
 }

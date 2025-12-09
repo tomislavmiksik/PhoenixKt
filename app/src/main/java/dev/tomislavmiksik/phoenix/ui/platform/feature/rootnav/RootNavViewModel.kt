@@ -3,6 +3,7 @@ package dev.tomislavmiksik.phoenix.ui.platform.feature.rootnav
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.tomislavmiksik.phoenix.core.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,8 +19,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class RootNavViewModel @Inject constructor(
-    // TODO: Inject AuthRepository when available
-    // private val authRepository: AuthRepository
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _rootNavState = MutableStateFlow<RootNavState>(RootNavState.Loading)
@@ -31,17 +31,12 @@ class RootNavViewModel @Inject constructor(
 
     private fun observeUserState() {
         viewModelScope.launch {
-            // TODO: Observe user authentication state from AuthRepository
-            // For now, default to Auth flow
-            // authRepository.userStateFlow.collect { userState ->
-            //     _rootNavState.value = when {
-            //         userState.isLoggedIn -> RootNavState.Main
-            //         else -> RootNavState.Auth
-            //     }
-            // }
-
-            // Temporary: Default to Auth flow
-            _rootNavState.value = RootNavState.Auth
+            authRepository.getAuthFlowState().collect { userState ->
+                _rootNavState.value = when {
+                    userState != null -> RootNavState.Main
+                    else -> RootNavState.Auth
+                }
+            }
         }
     }
 
