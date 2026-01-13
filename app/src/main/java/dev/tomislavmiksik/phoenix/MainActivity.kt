@@ -11,15 +11,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.health.connect.client.PermissionController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.tomislavmiksik.phoenix.ui.platform.rootnav.RootNavScreen
 import dev.tomislavmiksik.phoenix.ui.theme.PhoenixTheme
 
-/**
- * Main entry point of the Phoenix application.
- * Sets up the root navigation and theme.
- */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private var pendingPermissionCallback: ((Set<String>) -> Unit)? = null
+
+    private val permissionsLauncher = registerForActivityResult(
+        PermissionController.createRequestPermissionResultContract()
+    ) { granted ->
+        pendingPermissionCallback?.invoke(granted)
+        pendingPermissionCallback = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
@@ -41,7 +49,12 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        // TODO: Add navigation graph here (History and Settings screens)
+                        RootNavScreen(
+                            onLaunchPermissionRequest = { permissions, onResult ->
+                                pendingPermissionCallback = onResult
+                                permissionsLauncher.launch(permissions)
+                            }
+                        )
                     }
                 }
             }

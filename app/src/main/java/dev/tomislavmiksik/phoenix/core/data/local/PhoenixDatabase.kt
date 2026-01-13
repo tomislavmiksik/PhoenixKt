@@ -1,18 +1,13 @@
 package dev.tomislavmiksik.phoenix.core.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import dev.tomislavmiksik.phoenix.core.data.local.converters.LocalDateTimeConverter
-import dev.tomislavmiksik.phoenix.core.data.local.dao.ClipboardDao
-import dev.tomislavmiksik.phoenix.core.data.local.entity.ClipboardEntry
+import dev.tomislavmiksik.phoenix.core.domain.model.HealthSnapshot
 
 @Database(
-    entities = [
-        ClipboardEntry::class,
-    ],
+    entities = [HealthSnapshot::class],
     version = 1,
     exportSchema = false
 )
@@ -20,33 +15,5 @@ import dev.tomislavmiksik.phoenix.core.data.local.entity.ClipboardEntry
     LocalDateTimeConverter::class,
 )
 abstract class PhoenixDatabase : RoomDatabase() {
-    abstract fun clipboardDao(): ClipboardDao
-
-    companion object {
-        private const val DB_NAME = "phoenix_database"
-
-        @Volatile
-        @Suppress("ktlint:standard:property-naming")
-        private var INSTANCE: PhoenixDatabase? = null
-
-        fun getInstance(context: Context): PhoenixDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-
-            synchronized(this) {
-                val instance =
-                    Room.databaseBuilder(
-                        context.applicationContext,
-                        PhoenixDatabase::class.java,
-                        DB_NAME,
-                    ).fallbackToDestructiveMigration()
-                        .build()
-
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
+    // TODO: Add DAOs here when implementing local caching for health data
 }

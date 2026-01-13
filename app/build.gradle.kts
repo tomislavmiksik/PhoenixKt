@@ -127,6 +127,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.ui)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
@@ -169,6 +170,9 @@ dependencies {
     // Datastore preferences
     implementation(libs.datastore)
     implementation(libs.datastore.preferences)
+
+    // Health Connect
+    implementation(libs.health.connect.client)
 }
 
 // Detekt Configuration
