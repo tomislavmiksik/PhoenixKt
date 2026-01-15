@@ -1,21 +1,17 @@
 package dev.tomislavmiksik.phoenix.core.data.local.converters
 
 import androidx.room.TypeConverter
-import dev.tomislavmiksik.phoenix.core.util.extensions.toMillis
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.util.Date
+import java.time.LocalDate
 
-class LocalDateTimeConverter{
+class LocalDateTimeConverter {
 
     @TypeConverter
-    fun timestampToLocalDateTime(value : Long?) : LocalDateTime? {
-        return if (value != null) LocalDateTime.from(Instant.ofEpochMilli(value)) else null;
+    fun localDateToString(value: LocalDate?): String? {
+        return value?.toString()
     }
 
     @TypeConverter
-    fun dateToTimestamp(value: LocalDateTime?) : Long? {
-        return value?.toMillis();
+    fun stringToLocalDate(value: String?): LocalDate? {
+        return value?.let { LocalDate.parse(it) }
     }
 }

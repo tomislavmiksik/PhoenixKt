@@ -21,10 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.tomislavmiksik.phoenix.R
 import dev.tomislavmiksik.phoenix.ui.base.EventsEffect
 
 @Composable
@@ -103,7 +105,7 @@ private fun OnboardingWelcome(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Welcome to Phoenix",
+            text = stringResource(R.string.onboarding_welcome),
             style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center
         )
@@ -111,7 +113,7 @@ private fun OnboardingWelcome(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Your personal health dashboard",
+            text = stringResource(R.string.onboarding_subtitle),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
@@ -120,7 +122,7 @@ private fun OnboardingWelcome(
         Spacer(modifier = Modifier.height(32.dp))
 
         Text(
-            text = "Phoenix connects to Health Connect to display your steps, sleep, heart rate, workouts, and weight with beautiful visualizations.",
+            text = stringResource(R.string.onboarding_description),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -142,7 +144,7 @@ private fun OnboardingWelcome(
             onClick = onRequestPermissions,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Connect Health Data")
+            Text(stringResource(R.string.onboarding_connect_health_data))
         }
     }
 }
@@ -166,7 +168,7 @@ private fun HealthConnectUnavailable(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Health Connect Required",
+            text = stringResource(R.string.health_connect_required),
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center
         )
@@ -174,7 +176,7 @@ private fun HealthConnectUnavailable(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Please install Health Connect from the Play Store to use Phoenix.",
+            text = stringResource(R.string.health_connect_install_play_store),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant

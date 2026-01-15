@@ -9,7 +9,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import dev.tomislavmiksik.phoenix.R
 
 @Composable
 fun ProfileScreen(
@@ -23,11 +25,11 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Profile",
+            text = stringResource(R.string.profile_title),
             style = MaterialTheme.typography.headlineLarge
         )
         Text(
-            text = "Coming soon",
+            text = stringResource(R.string.common_coming_soon),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )

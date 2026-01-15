@@ -7,6 +7,8 @@
     <string name="common_loading">Loading…</string>
     <string name="common_error">Something went wrong</string>
     <string name="common_retry">Retry</string>
+    <string name="common_coming_soon">Coming soon</string>
+    <string name="common_add">Add</string>
 
     <!-- Health Connect -->
     <string name="health_permissions_rationale">Phoenix displays your health data from Health Connect to help you track your fitness progress with rich visualizations.</string>
@@ -14,9 +16,18 @@
     <string name="health_connect_install_prompt">Please install Health Connect to use Phoenix</string>
     <string name="health_connect_permissions_required">Health permissions required</string>
     <string name="health_connect_grant_permissions">Grant Permissions</string>
+    <string name="health_connect_required">Health Connect Required</string>
+    <string name="health_connect_install_play_store">Please install Health Connect from the Play Store to use Phoenix.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Welcome to Phoenix</string>
+    <string name="onboarding_subtitle">Your personal health dashboard</string>
+    <string name="onboarding_description">Phoenix connects to Health Connect to display your steps, sleep, heart rate, workouts, and weight with beautiful visualizations.</string>
+    <string name="onboarding_connect_health_data">Connect Health Data</string>
 
     <!-- Navigation -->
     <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_profile">Profile</string>
     <string name="nav_steps">Steps</string>
     <string name="nav_sleep">Sleep</string>
     <string name="nav_activity">Activity</string>
@@ -27,6 +38,12 @@
     <string name="dashboard_today">Today</string>
     <string name="dashboard_this_week">This Week</string>
     <string name="dashboard_this_month">This Month</string>
+    <string name="dashboard_average_steps_per_day">Avg. Steps per day</string>
+    <string name="dashboard_steps_on_date">%1s %2s</string>
+    <string name="dashboard_steps_common">Steps: %s</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Profile</string>
 
     <!-- Steps -->
     <string name="steps_title">Steps</string>
@@ -56,4 +73,6 @@
     <string name="stats_bpm">bpm</string>
     <string name="stats_kg">kg</string>
     <string name="stats_kcal">kcal</string>
+    <string name="profile_button">Profile button</string>
+    <string name="avg_calories_spent_per_day">Avg. calories spent per day</string>
 </resources>

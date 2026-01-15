@@ -8,7 +8,7 @@ import dev.tomislavmiksik.phoenix.core.domain.model.HealthSnapshot
 
 @Database(
     entities = [HealthSnapshot::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(

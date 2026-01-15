@@ -11,4 +11,9 @@ interface HealthConnectRepository {
     suspend fun getTodaySnapshot(): HealthSnapshot
     suspend fun getStepsForDate(date: LocalDate): Long
     suspend fun getStepsForDateRange(startDate: LocalDate, endDate: LocalDate): Map<LocalDate, Long>
+    suspend fun getActiveCaloriesForDate(date: LocalDate): Long
+    suspend fun getActiveCaloriesForDateRange(
+        startDate: LocalDate,
+        endDate: LocalDate,
+    ): Map<LocalDate, Long>
 }
