@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.ui.logbook
+package dev.tomislavmiksik.peak.ui.progress
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import dev.tomislavmiksik.peak.R
 
 @Composable
-fun LogbookScreen(
+fun ProgressScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -25,7 +25,7 @@ fun LogbookScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(R.string.logbook_title),
+            text = stringResource(R.string.progress_title),
             style = MaterialTheme.typography.headlineLarge
         )
         Text(

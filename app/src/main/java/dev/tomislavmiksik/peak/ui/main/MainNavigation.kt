@@ -18,7 +18,7 @@ data object HomeRoute
 data object ActivityRoute
 
 @Serializable
-data object LogbookRoute
+data object ProgressRoute
 
 fun NavGraphBuilder.mainGraph() {
     navigation<MainGraph>(

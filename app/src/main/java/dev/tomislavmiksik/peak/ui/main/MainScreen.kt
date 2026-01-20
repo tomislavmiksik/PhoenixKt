@@ -17,7 +17,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dev.tomislavmiksik.peak.ui.activity.ActivityScreen
 import dev.tomislavmiksik.peak.ui.home.HomeScreen
-import dev.tomislavmiksik.peak.ui.logbook.LogbookScreen
+import dev.tomislavmiksik.peak.ui.progress.ProgressScreen
 import dev.tomislavmiksik.peak.ui.main.components.BottomNavBar
 import dev.tomislavmiksik.peak.ui.main.components.BottomNavDestination
 
@@ -32,7 +32,7 @@ fun MainScreen(
 
     val selectedTab = when {
         currentDestination?.hasRoute<ActivityRoute>() == true -> BottomNavDestination.Activity
-        currentDestination?.hasRoute<LogbookRoute>() == true -> BottomNavDestination.Logbook
+        currentDestination?.hasRoute<ProgressRoute>() == true -> BottomNavDestination.Progress
         else -> BottomNavDestination.Home
     }
 
@@ -66,8 +66,8 @@ fun MainScreen(
             composable<ActivityRoute> {
                 ActivityScreen()
             }
-            composable<LogbookRoute> {
-                LogbookScreen()
+            composable<ProgressRoute> {
+                ProgressScreen()
             }
         }
     }

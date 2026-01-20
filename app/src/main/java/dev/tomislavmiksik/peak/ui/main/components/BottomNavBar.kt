@@ -4,8 +4,8 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DirectionsRun
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import dev.tomislavmiksik.peak.R
 import dev.tomislavmiksik.peak.ui.main.ActivityRoute
 import dev.tomislavmiksik.peak.ui.main.HomeRoute
-import dev.tomislavmiksik.peak.ui.main.LogbookRoute
+import dev.tomislavmiksik.peak.ui.main.ProgressRoute
 
 @Composable
 fun BottomNavBar(
@@ -74,9 +74,9 @@ enum class BottomNavDestination(
         icon = Icons.AutoMirrored.Filled.DirectionsRun,
         labelRes = R.string.nav_activity
     ),
-    Logbook(
-        route = LogbookRoute,
-        icon = Icons.Default.MenuBook,
-        labelRes = R.string.nav_logbook
+    Progress(
+        route = ProgressRoute,
+        icon = Icons.AutoMirrored.Filled.TrendingUp,
+        labelRes = R.string.nav_progress
     )
 }
