@@ -24,6 +24,21 @@
     <string name="onboarding_subtitle">Your personal health dashboard</string>
     <string name="onboarding_description">Peak connects to Health Connect to display your steps, sleep, heart rate, workouts, and weight with beautiful visualizations.</string>
     <string name="onboarding_connect_health_data">Connect Health Data</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="onboarding_skip">Skip</string>
+
+    <!-- Onboarding Page 1 - Track Activity -->
+    <string name="onboarding_page1_title">Track Your Activity</string>
+    <string name="onboarding_page1_description">Monitor your daily steps, distance walked, and calories burned throughout the day.</string>
+
+    <!-- Onboarding Page 2 - Monitor Health -->
+    <string name="onboarding_page2_title">Monitor Your Health</string>
+    <string name="onboarding_page2_description">Keep track of your sleep patterns, heart rate, and overall wellness metrics.</string>
+
+    <!-- Onboarding Page 3 - Connect -->
+    <string name="onboarding_page3_title">Connect Health Data</string>
+    <string name="onboarding_page3_description">Link with Health Connect to sync all your health data in one place.</string>
 
     <!-- Navigation -->
     <string name="nav_home">Home</string>

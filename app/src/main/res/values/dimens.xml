@@ -42,4 +42,9 @@
     <!-- Elevation -->
     <dimen name="elevation_sm">4dp</dimen>
     <dimen name="elevation_md">8dp</dimen>
+
+    <!-- Onboarding -->
+    <dimen name="onboarding_image_size">280dp</dimen>
+    <dimen name="indicator_size">8dp</dimen>
+    <dimen name="indicator_size_selected">10dp</dimen>
 </resources>
