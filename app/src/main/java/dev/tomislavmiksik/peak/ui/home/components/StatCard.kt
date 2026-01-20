@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.ui.dashboard.components
+package dev.tomislavmiksik.peak.ui.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

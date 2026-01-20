@@ -1,21 +1,21 @@
-package dev.tomislavmiksik.peak.ui.dashboard
+package dev.tomislavmiksik.peak.ui.home
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.tomislavmiksik.peak.core.domain.model.HealthSnapshot
 import dev.tomislavmiksik.peak.core.domain.repository.HealthConnectRepository
 import dev.tomislavmiksik.peak.ui.base.BaseViewModel
-import dev.tomislavmiksik.peak.ui.dashboard.components.ActivityType
-import dev.tomislavmiksik.peak.ui.dashboard.components.RecentActivity
+import dev.tomislavmiksik.peak.ui.home.components.ActivityType
+import dev.tomislavmiksik.peak.ui.home.components.RecentActivity
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val healthConnectRepository: HealthConnectRepository,
-) : BaseViewModel<DashboardState, DashboardEvent, DashboardAction>(
-    initialState = DashboardState(
+) : BaseViewModel<HomeState, HomeEvent, HomeAction>(
+    initialState = HomeState(
         dateRange = Pair(
             //TODO: recheck on importing time as provider
             LocalDate.now().withDayOfMonth(1),
@@ -24,21 +24,21 @@ class DashboardViewModel @Inject constructor(
     )
 ) {
     init {
-        trySendAction(DashboardAction.LoadHealthData)
+        trySendAction(HomeAction.LoadHealthData)
     }
 
-    override fun handleAction(action: DashboardAction) {
+    override fun handleAction(action: HomeAction) {
         when (action) {
-            is DashboardAction.LoadHealthData -> handleLoadHealthData()
-            is DashboardAction.RefreshData -> handleRefreshData()
-            is DashboardAction.AddEntryClick -> handleAddEntryClick()
-            is DashboardAction.Internal.HealthDataLoaded -> handleHealthDataLoaded(
+            is HomeAction.LoadHealthData -> handleLoadHealthData()
+            is HomeAction.RefreshData -> handleRefreshData()
+            is HomeAction.AddEntryClick -> handleAddEntryClick()
+            is HomeAction.Internal.HealthDataLoaded -> handleHealthDataLoaded(
                 action.snapshot,
                 action.stepsByDate,
                 action.caloriesByDate
             )
 
-            is DashboardAction.Internal.HealthDataError -> handleHealthDataError(action.message)
+            is HomeAction.Internal.HealthDataError -> handleHealthDataError(action.message)
         }
     }
 
@@ -65,14 +65,14 @@ class DashboardViewModel @Inject constructor(
                     endDate = state.dateRange.second
                 )
                 sendAction(
-                    DashboardAction.Internal.HealthDataLoaded(
+                    HomeAction.Internal.HealthDataLoaded(
                         snapshot,
                         stepsByDate,
                         caloriesByDate
                     )
                 )
             } catch (e: Exception) {
-                sendAction(DashboardAction.Internal.HealthDataError(e.message ?: "Unknown error"))
+                sendAction(HomeAction.Internal.HealthDataError(e.message ?: "Unknown error"))
             }
         }
     }
@@ -115,11 +115,11 @@ class DashboardViewModel @Inject constructor(
     }
 
     private fun handleAddEntryClick() {
-        sendEvent(DashboardEvent.NavigateToAddEntry)
+        sendEvent(HomeEvent.NavigateToAddEntry)
     }
 }
 
-data class DashboardState(
+data class HomeState(
     val isLoading: Boolean = true,
     val isRefreshing: Boolean = false,
     val error: String? = null,
@@ -178,16 +178,16 @@ data class CalendarProgressTrackerData(
     val averageCaloriesSpentPerDay: Long,
 )
 
-sealed class DashboardEvent {
-    data object NavigateToAddEntry : DashboardEvent()
+sealed class HomeEvent {
+    data object NavigateToAddEntry : HomeEvent()
 }
 
-sealed class DashboardAction {
-    data object LoadHealthData : DashboardAction()
-    data object RefreshData : DashboardAction()
-    data object AddEntryClick : DashboardAction()
+sealed class HomeAction {
+    data object LoadHealthData : HomeAction()
+    data object RefreshData : HomeAction()
+    data object AddEntryClick : HomeAction()
 
-    sealed class Internal : DashboardAction() {
+    sealed class Internal : HomeAction() {
         data class HealthDataLoaded(
             val snapshot: HealthSnapshot,
             val stepsByDate: Map<LocalDate, Long>,

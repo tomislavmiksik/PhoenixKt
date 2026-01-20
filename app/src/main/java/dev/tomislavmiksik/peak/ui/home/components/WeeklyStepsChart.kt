@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.ui.dashboard.components
+package dev.tomislavmiksik.peak.ui.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -54,7 +54,7 @@ fun WeeklyStepsChart(
             .padding(dimensionResource(R.dimen.spacing_lg))
     ) {
         Text(
-            text = stringResource(R.string.dashboard_this_week),
+            text = stringResource(R.string.home_this_week),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -86,12 +86,12 @@ fun WeeklyStepsChart(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = stringResource(R.string.dashboard_total, formatSteps(totalSteps)),
+                text = stringResource(R.string.home_total, formatSteps(totalSteps)),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
-                text = stringResource(R.string.dashboard_avg, formatSteps(avgSteps)),
+                text = stringResource(R.string.home_avg, formatSteps(avgSteps)),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

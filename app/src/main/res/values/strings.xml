@@ -26,34 +26,34 @@
     <string name="onboarding_connect_health_data">Connect Health Data</string>
 
     <!-- Navigation -->
-    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_home">Home</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_steps">Steps</string>
     <string name="nav_sleep">Sleep</string>
     <string name="nav_activity">Activity</string>
-    <string name="nav_stats">Stats</string>
+    <string name="nav_logbook">Logbook</string>
     <string name="nav_settings">Settings</string>
 
-    <!-- Dashboard -->
-    <string name="dashboard_title">Dashboard</string>
-    <string name="dashboard_today">Today</string>
-    <string name="dashboard_this_week">This Week</string>
-    <string name="dashboard_this_month">This Month</string>
-    <string name="dashboard_average_steps_per_day">Avg. Steps per day</string>
-    <string name="dashboard_steps_on_date">%1s %2s</string>
-    <string name="dashboard_steps_common">Steps: %s</string>
-    <string name="dashboard_sleep">Sleep</string>
-    <string name="dashboard_heart_rate">Heart</string>
-    <string name="dashboard_resting">resting</string>
-    <string name="dashboard_burned">burned</string>
-    <string name="dashboard_active">Active</string>
-    <string name="dashboard_active_today">today</string>
-    <string name="dashboard_total">Total: %s</string>
-    <string name="dashboard_avg">Avg: %s</string>
-    <string name="dashboard_vs_last_week">%s vs last week</string>
-    <string name="dashboard_recent_activity">Recent Activity</string>
-    <string name="dashboard_minutes_short">%d min</string>
-    <string name="dashboard_hours_minutes">%dh %dm</string>
+    <!-- Home -->
+    <string name="home_title">Home</string>
+    <string name="home_today">Today</string>
+    <string name="home_this_week">This Week</string>
+    <string name="home_this_month">This Month</string>
+    <string name="home_average_steps_per_day">Avg. Steps per day</string>
+    <string name="home_steps_on_date">%1s %2s</string>
+    <string name="home_steps_common">Steps: %s</string>
+    <string name="home_sleep">Sleep</string>
+    <string name="home_heart_rate">Heart</string>
+    <string name="home_resting">resting</string>
+    <string name="home_burned">burned</string>
+    <string name="home_active">Active</string>
+    <string name="home_active_today">today</string>
+    <string name="home_total">Total: %s</string>
+    <string name="home_avg">Avg: %s</string>
+    <string name="home_vs_last_week">%s vs last week</string>
+    <string name="home_recent_activity">Recent Activity</string>
+    <string name="home_minutes_short">%d min</string>
+    <string name="home_hours_minutes">%dh %dm</string>
 
     <!-- Profile -->
     <string name="profile_title">Profile</string>
@@ -79,6 +79,9 @@
     <string name="settings_manage_permissions">Manage Permissions</string>
     <string name="settings_about">About</string>
     <string name="settings_version">Version %1$s</string>
+
+    <!-- Logbook -->
+    <string name="logbook_title">Logbook</string>
 
     <!-- Stats -->
     <string name="stats_title">Stats</string>

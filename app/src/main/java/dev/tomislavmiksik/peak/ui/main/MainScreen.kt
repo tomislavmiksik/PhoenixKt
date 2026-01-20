@@ -16,10 +16,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dev.tomislavmiksik.peak.ui.activity.ActivityScreen
-import dev.tomislavmiksik.peak.ui.dashboard.DashboardScreen
+import dev.tomislavmiksik.peak.ui.home.HomeScreen
+import dev.tomislavmiksik.peak.ui.logbook.LogbookScreen
 import dev.tomislavmiksik.peak.ui.main.components.BottomNavBar
 import dev.tomislavmiksik.peak.ui.main.components.BottomNavDestination
-import dev.tomislavmiksik.peak.ui.stats.StatsScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -32,8 +32,8 @@ fun MainScreen(
 
     val selectedTab = when {
         currentDestination?.hasRoute<ActivityRoute>() == true -> BottomNavDestination.Activity
-        currentDestination?.hasRoute<StatsRoute>() == true -> BottomNavDestination.Stats
-        else -> BottomNavDestination.Dashboard
+        currentDestination?.hasRoute<LogbookRoute>() == true -> BottomNavDestination.Logbook
+        else -> BottomNavDestination.Home
     }
 
     Scaffold(
@@ -56,18 +56,18 @@ fun MainScreen(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = DashboardRoute,
+            startDestination = HomeRoute,
             enterTransition = { fadeIn(animationSpec = tween(150)) },
             exitTransition = { fadeOut(animationSpec = tween(150)) }
         ) {
-            composable<DashboardRoute> {
-                DashboardScreen()
+            composable<HomeRoute> {
+                HomeScreen()
             }
             composable<ActivityRoute> {
                 ActivityScreen()
             }
-            composable<StatsRoute> {
-                StatsScreen()
+            composable<LogbookRoute> {
+                LogbookScreen()
             }
         }
     }

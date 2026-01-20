@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.ui.dashboard.components
+package dev.tomislavmiksik.peak.ui.home.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,10 +16,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import dev.tomislavmiksik.peak.R
 import dev.tomislavmiksik.peak.ui.base.components.PeakBox
-import dev.tomislavmiksik.peak.ui.dashboard.CalendarProgressTrackerData
+import dev.tomislavmiksik.peak.ui.home.CalendarProgressTrackerData
 
 @Composable
-fun DashboardHeroSection(
+fun HomeHeroSection(
     modifier: Modifier = Modifier,
     steps: Long,
     goal: Long = 10_000L,

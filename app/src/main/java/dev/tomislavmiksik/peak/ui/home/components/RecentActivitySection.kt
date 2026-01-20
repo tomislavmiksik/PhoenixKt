@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.ui.dashboard.components
+package dev.tomislavmiksik.peak.ui.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -50,7 +50,7 @@ fun RecentActivitySection(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
-            text = stringResource(R.string.dashboard_recent_activity),
+            text = stringResource(R.string.home_recent_activity),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onBackground
         )

@@ -4,8 +4,8 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DirectionsRun
-import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -20,8 +20,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import dev.tomislavmiksik.peak.R
 import dev.tomislavmiksik.peak.ui.main.ActivityRoute
-import dev.tomislavmiksik.peak.ui.main.DashboardRoute
-import dev.tomislavmiksik.peak.ui.main.StatsRoute
+import dev.tomislavmiksik.peak.ui.main.HomeRoute
+import dev.tomislavmiksik.peak.ui.main.LogbookRoute
 
 @Composable
 fun BottomNavBar(
@@ -64,19 +64,19 @@ enum class BottomNavDestination(
     val icon: ImageVector,
     @StringRes val labelRes: Int,
 ) {
-    Dashboard(
-        route = DashboardRoute,
+    Home(
+        route = HomeRoute,
         icon = Icons.Default.Home,
-        labelRes = R.string.nav_dashboard
+        labelRes = R.string.nav_home
     ),
     Activity(
         route = ActivityRoute,
         icon = Icons.AutoMirrored.Filled.DirectionsRun,
         labelRes = R.string.nav_activity
     ),
-    Stats(
-        route = StatsRoute,
-        icon = Icons.Default.BarChart,
-        labelRes = R.string.nav_stats
+    Logbook(
+        route = LogbookRoute,
+        icon = Icons.Default.MenuBook,
+        labelRes = R.string.nav_logbook
     )
 }

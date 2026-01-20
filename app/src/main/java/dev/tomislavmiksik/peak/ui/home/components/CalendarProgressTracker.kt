@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.ui.dashboard.components
+package dev.tomislavmiksik.peak.ui.home.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -27,7 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.tomislavmiksik.peak.R
 import dev.tomislavmiksik.peak.core.util.extensions.toMonthYearStringShort
-import dev.tomislavmiksik.peak.ui.dashboard.CalendarProgressTrackerData
+import dev.tomislavmiksik.peak.ui.home.CalendarProgressTrackerData
 import java.time.DayOfWeek
 import java.time.LocalDate
 

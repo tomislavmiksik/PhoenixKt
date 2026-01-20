@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 
-package dev.tomislavmiksik.peak.ui.dashboard
+package dev.tomislavmiksik.peak.ui.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -37,35 +37,35 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.tomislavmiksik.peak.R
 import dev.tomislavmiksik.peak.ui.base.EventsEffect
-import dev.tomislavmiksik.peak.ui.dashboard.components.DashboardHeroSection
-import dev.tomislavmiksik.peak.ui.dashboard.components.RecentActivitySection
-import dev.tomislavmiksik.peak.ui.dashboard.components.TodaySection
-import dev.tomislavmiksik.peak.ui.dashboard.components.WeeklyStepsChart
+import dev.tomislavmiksik.peak.ui.home.components.HomeHeroSection
+import dev.tomislavmiksik.peak.ui.home.components.RecentActivitySection
+import dev.tomislavmiksik.peak.ui.home.components.TodaySection
+import dev.tomislavmiksik.peak.ui.home.components.WeeklyStepsChart
 
 @Composable
-fun DashboardScreen(
+fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: DashboardViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
     onNavigateToAddEntry: () -> Unit = {},
 ) {
     val state by viewModel.stateFlow.collectAsStateWithLifecycle()
 
     EventsEffect(viewModel) { event ->
         when (event) {
-            is DashboardEvent.NavigateToAddEntry -> onNavigateToAddEntry()
+            is HomeEvent.NavigateToAddEntry -> onNavigateToAddEntry()
         }
     }
 
-    DashboardContent(
+    HomeContent(
         state = state,
-        onRefresh = { viewModel.trySendAction(DashboardAction.RefreshData) },
+        onRefresh = { viewModel.trySendAction(HomeAction.RefreshData) },
         modifier = modifier
     )
 }
 
 @Composable
-private fun DashboardContent(
-    state: DashboardState,
+private fun HomeContent(
+    state: HomeState,
     onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -101,13 +101,13 @@ private fun DashboardContent(
                         ),
                         title = {
                             Text(
-                                text = stringResource(R.string.dashboard_title),
+                                text = stringResource(R.string.home_title),
                                 style = MaterialTheme.typography.headlineSmall,
                                 color = MaterialTheme.colorScheme.primary
                             )
                         },
                         actions = {
-                            DashboardHeader()
+                            HomeHeader()
                         },
                         modifier = Modifier.fillMaxWidth(),
                     )
@@ -140,7 +140,7 @@ private fun DashboardContent(
                             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.spacing_xl))
                         ) {
                             item {
-                                DashboardHeroSection(
+                                HomeHeroSection(
                                     steps = state.steps,
                                     goal = 10_000L,
                                     calendarData = state.calendarProgressTrackerData,
@@ -182,7 +182,7 @@ private fun DashboardContent(
 }
 
 @Composable
-private fun DashboardHeader(
+private fun HomeHeader(
     modifier: Modifier = Modifier,
 ) {
     Box(

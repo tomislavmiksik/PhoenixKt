@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.ui.dashboard.components
+package dev.tomislavmiksik.peak.ui.home.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,7 +33,7 @@ fun TodaySection(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
-            text = stringResource(R.string.dashboard_today),
+            text = stringResource(R.string.home_today),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -45,7 +45,7 @@ fun TodaySection(
             StatCard(
                 icon = Icons.Default.Bedtime,
                 iconTint = Color(0xFF7C4DFF),
-                title = stringResource(R.string.dashboard_sleep),
+                title = stringResource(R.string.home_sleep),
                 value = formatSleepDuration(sleepMinutes),
                 subtitle = "",
                 modifier = Modifier.weight(1f)
@@ -53,9 +53,9 @@ fun TodaySection(
             StatCard(
                 icon = Icons.Default.Favorite,
                 iconTint = Color(0xFFE91E63),
-                title = stringResource(R.string.dashboard_heart_rate),
+                title = stringResource(R.string.home_heart_rate),
                 value = "$heartRate bpm",
-                subtitle = stringResource(R.string.dashboard_resting),
+                subtitle = stringResource(R.string.home_resting),
                 modifier = Modifier.weight(1f)
             )
         }
@@ -69,15 +69,15 @@ fun TodaySection(
                 iconTint = Color(0xFFFF5722),
                 title = stringResource(R.string.calories_today),
                 value = "%,d".format(calories.toInt()),
-                subtitle = stringResource(R.string.dashboard_burned),
+                subtitle = stringResource(R.string.home_burned),
                 modifier = Modifier.weight(1f)
             )
             StatCard(
                 icon = Icons.AutoMirrored.Filled.DirectionsRun,
                 iconTint = Color(0xFF4CAF50),
-                title = stringResource(R.string.dashboard_active),
+                title = stringResource(R.string.home_active),
                 value = "$activeMinutes min",
-                subtitle = stringResource(R.string.dashboard_active_today),
+                subtitle = stringResource(R.string.home_active_today),
                 modifier = Modifier.weight(1f)
             )
         }
