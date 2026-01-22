@@ -35,7 +35,6 @@ class HomeViewModel @Inject constructor(
             is HomeAction.Internal.HealthDataLoaded -> handleHealthDataLoaded(
                 action.snapshot,
                 action.stepsByDate,
-                action.caloriesByDate
             )
 
             is HomeAction.Internal.HealthDataError -> handleHealthDataError(action.message)
@@ -60,15 +59,11 @@ class HomeViewModel @Inject constructor(
                     startDate = state.dateRange.first,
                     endDate = state.dateRange.second
                 )
-                val caloriesByDate = healthConnectRepository.getActiveCaloriesForDateRange(
-                    startDate = state.dateRange.first,
-                    endDate = state.dateRange.second
-                )
+
                 sendAction(
                     HomeAction.Internal.HealthDataLoaded(
                         snapshot,
                         stepsByDate,
-                        caloriesByDate
                     )
                 )
             } catch (e: Exception) {
@@ -81,7 +76,6 @@ class HomeViewModel @Inject constructor(
     private fun handleHealthDataLoaded(
         snapshot: HealthSnapshot,
         stepsByDate: Map<LocalDate, Long>,
-        caloriesByDate: Map<LocalDate, Long>,
     ) {
         mutableStateFlow.value = state.copy(
             isLoading = false,
@@ -103,7 +97,6 @@ class HomeViewModel @Inject constructor(
             weight = snapshot.weight,
             // Chart
             stepsByDate = stepsByDate,
-            caloriesByDate = caloriesByDate
         )
     }
 
@@ -192,7 +185,6 @@ sealed class HomeAction {
         data class HealthDataLoaded(
             val snapshot: HealthSnapshot,
             val stepsByDate: Map<LocalDate, Long> = emptyMap(),
-            val caloriesByDate: Map<LocalDate, Long> = emptyMap(),
         ) : Internal()
 
         data class HealthDataError(val message: String) : Internal()
