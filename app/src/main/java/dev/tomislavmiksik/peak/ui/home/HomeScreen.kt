@@ -48,7 +48,6 @@ import dev.tomislavmiksik.peak.ui.home.components.HomeHeroSection
 import dev.tomislavmiksik.peak.ui.home.components.RecentActivity
 import dev.tomislavmiksik.peak.ui.home.components.RecentActivitySection
 import dev.tomislavmiksik.peak.ui.home.components.TodaySection
-import dev.tomislavmiksik.peak.ui.home.components.WeeklyStepsChart
 import dev.tomislavmiksik.peak.ui.theme.PeakTheme
 import java.time.LocalDate
 
@@ -172,7 +171,9 @@ private fun HomeContent(
                                     steps = state.steps,
                                     goal = 10_000L,
                                     calendarData = state.calendarProgressTrackerData,
-                                    modifier = Modifier.fillMaxWidth()
+                                    modifier = Modifier
+                                        .padding(top = dimensionResource(R.dimen.spacing_lg))
+                                        .fillMaxWidth()
                                 )
                             }
 
@@ -185,14 +186,6 @@ private fun HomeContent(
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             }
-
-                            item {
-                                WeeklyStepsChart(
-                                    stepsByDate = state.stepsByDate,
-                                    modifier = Modifier.fillMaxWidth()
-                                )
-                            }
-
                             item {
                                 RecentActivitySection(
                                     activities = state.recentActivities,

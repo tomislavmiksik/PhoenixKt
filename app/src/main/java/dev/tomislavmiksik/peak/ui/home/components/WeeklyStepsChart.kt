@@ -110,10 +110,12 @@ private fun DayBar(
     isFuture: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    val maxBarHeight = dimensionResource(R.dimen.chart_bar_max_height)
+    val minBarHeight = dimensionResource(R.dimen.chart_bar_min_height)
     val barHeight = if (steps > 0) {
-        (steps.toFloat() / maxSteps * 80).dp
+        (steps.toFloat() / maxSteps * maxBarHeight.value).dp
     } else {
-        4.dp
+        minBarHeight
     }
 
     val barColor = when {

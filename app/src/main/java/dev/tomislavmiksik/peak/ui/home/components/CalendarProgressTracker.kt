@@ -14,17 +14,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import dev.tomislavmiksik.peak.R
 import dev.tomislavmiksik.peak.core.util.extensions.toMonthYearStringShort
@@ -33,7 +34,7 @@ import dev.tomislavmiksik.peak.ui.theme.PeakTheme
 import java.time.DayOfWeek
 import java.time.LocalDate
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun CalendarProgressTracker(
     data: CalendarProgressTrackerData,
@@ -41,20 +42,22 @@ fun CalendarProgressTracker(
 ) {
     Column(
         modifier = modifier.padding(dimensionResource(R.dimen.spacing_sm)),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
     ) {
         Text(
-            text = data.stepsByDate.keys.first().toMonthYearStringShort(),
+            text = data.stepsByDate.keys.firstOrNull()?.toMonthYearStringShort() ?: "",
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Spacer(
-            modifier = Modifier
+            modifier = modifier
                 .height(dimensionResource(R.dimen.spacing_sm))
         )
         Row(
-            modifier = Modifier.padding(bottom = dimensionResource(R.dimen.spacing_lg)),
-            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.spacing_sm))
+            modifier = modifier.padding(bottom = dimensionResource(R.dimen.spacing_lg)),
+            horizontalArrangement = Arrangement.spacedBy(
+                dimensionResource(R.dimen.spacing_sm),
+            )
         ) {
             FlowRow(
                 modifier = modifier,
@@ -122,6 +125,10 @@ fun stepCountToColor(steps: Long, goal: Int = 10000): Color {
 fun CalendarDay(dateData: Map.Entry<LocalDate, Long>) {
     val isToday = dateData.key == LocalDate.now()
     val calendarDaySize = dimensionResource(R.dimen.calendar_day_size)
+    val borderWidthToday = dimensionResource(R.dimen.border_width_md)
+    val borderWidthDefault = dimensionResource(R.dimen.border_width_sm)
+    val cornerRadiusSm = dimensionResource(R.dimen.corner_radius_sm)
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -132,27 +139,29 @@ fun CalendarDay(dateData: Map.Entry<LocalDate, Long>) {
             .size(calendarDaySize)
             .clip(shape = MaterialTheme.shapes.small)
             .border(
-                width = if (isToday) 2.dp else 1.dp,
+                width = if (isToday) borderWidthToday else borderWidthDefault,
                 color = if (isToday)
-                    Color.Black
+                    MaterialTheme.colorScheme.inverseSurface
                 else
                     MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                 shape = MaterialTheme.shapes.small,
             )
     ) {
         if (isToday) {
+            val currentDayColor = MaterialTheme.colorScheme.inverseSurface
             Canvas(
                 modifier = Modifier.fillMaxSize()
             ) {
-                val r = 4.dp.toPx()
+                val r = cornerRadiusSm.toPx()
                 val triangleHeight = size.height * 0.45f
+
 
                 val path = Path().apply {
                     moveTo(r, size.height)
                     lineTo(size.width / 2, size.height - triangleHeight)
                     lineTo(size.width - r, size.height)
                     arcTo(
-                        rect = androidx.compose.ui.geometry.Rect(
+                        rect = Rect(
                             left = size.width - r * 2,
                             top = size.height - r * 2,
                             right = size.width,
@@ -164,7 +173,7 @@ fun CalendarDay(dateData: Map.Entry<LocalDate, Long>) {
                     )
                     lineTo(r, size.height)
                     arcTo(
-                        rect = androidx.compose.ui.geometry.Rect(
+                        rect = Rect(
                             left = 0f,
                             top = size.height - r * 2,
                             right = r * 2,
@@ -176,7 +185,7 @@ fun CalendarDay(dateData: Map.Entry<LocalDate, Long>) {
                     )
                     close()
                 }
-                drawPath(path, color = Color.Black)
+                drawPath(path, color = currentDayColor)
             }
         }
     }

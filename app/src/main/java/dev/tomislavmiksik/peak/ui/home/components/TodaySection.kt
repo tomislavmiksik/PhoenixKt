@@ -46,7 +46,6 @@ fun TodaySection(
         ) {
             StatCard(
                 icon = Icons.Default.Bedtime,
-                iconTint = Color(0xFF7C4DFF),
                 title = stringResource(R.string.home_sleep),
                 value = formatSleepDuration(sleepMinutes),
                 subtitle = "",
@@ -54,7 +53,6 @@ fun TodaySection(
             )
             StatCard(
                 icon = Icons.Default.Favorite,
-                iconTint = Color(0xFFE91E63),
                 title = stringResource(R.string.home_heart_rate),
                 value = "$heartRate bpm",
                 subtitle = stringResource(R.string.home_resting),
@@ -68,7 +66,6 @@ fun TodaySection(
         ) {
             StatCard(
                 icon = Icons.Default.LocalFireDepartment,
-                iconTint = Color(0xFFFF5722),
                 title = stringResource(R.string.calories_today),
                 value = "%,d".format(calories.toInt()),
                 subtitle = stringResource(R.string.home_burned),
@@ -76,7 +73,6 @@ fun TodaySection(
             )
             StatCard(
                 icon = Icons.AutoMirrored.Filled.DirectionsRun,
-                iconTint = Color(0xFF4CAF50),
                 title = stringResource(R.string.home_active),
                 value = "$activeMinutes min",
                 subtitle = stringResource(R.string.home_active_today),

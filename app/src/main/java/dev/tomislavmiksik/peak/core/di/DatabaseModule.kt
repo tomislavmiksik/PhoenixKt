@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dev.tomislavmiksik.peak.core.data.local.HealthSnapshotDao
 import dev.tomislavmiksik.peak.core.data.local.PeakDatabase
+import dev.tomislavmiksik.peak.core.data.local.dao.HealthSnapshotDao
 import javax.inject.Singleton
 
 @Module

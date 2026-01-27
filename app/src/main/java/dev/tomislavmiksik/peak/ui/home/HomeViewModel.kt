@@ -3,7 +3,7 @@ package dev.tomislavmiksik.peak.ui.home
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.tomislavmiksik.peak.core.domain.model.HealthSnapshot
+import dev.tomislavmiksik.peak.core.data.local.entity.HealthSnapshot
 import dev.tomislavmiksik.peak.core.domain.repository.HealthConnectRepository
 import dev.tomislavmiksik.peak.ui.base.BaseViewModel
 import dev.tomislavmiksik.peak.ui.home.components.RecentActivity
@@ -94,7 +94,6 @@ class HomeViewModel @Inject constructor(
             sleepEndTime = snapshot.sleepEndTime,
             // Vitals
             heartRate = snapshot.heartRate,
-            weight = snapshot.weight,
             // Chart
             stepsByDate = stepsByDate,
         )

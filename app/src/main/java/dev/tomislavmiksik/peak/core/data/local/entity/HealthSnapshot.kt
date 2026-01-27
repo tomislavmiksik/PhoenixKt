@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.core.domain.model
+package dev.tomislavmiksik.peak.core.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -26,5 +26,4 @@ data class HealthSnapshot(
 
     // Vitals
     val heartRate: Long = 0,
-    val weight: Double = 0.0
 )

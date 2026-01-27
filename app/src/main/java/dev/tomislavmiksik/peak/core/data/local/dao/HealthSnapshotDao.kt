@@ -1,4 +1,4 @@
-package dev.tomislavmiksik.peak.core.data.local
+package dev.tomislavmiksik.peak.core.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,17 +6,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import dev.tomislavmiksik.peak.core.domain.model.HealthSnapshot
+import dev.tomislavmiksik.peak.core.data.local.entity.HealthSnapshot
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
 @Dao
 interface HealthSnapshotDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(healthSnapshot: HealthSnapshot): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertAll(healthSnapshots: List<HealthSnapshot>)
 
     @Update

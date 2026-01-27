@@ -1,12 +1,15 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package dev.tomislavmiksik.peak.ui.home.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,36 +31,47 @@ fun HomeHeroSection(
     goal: Long = 10_000L,
     calendarData: CalendarProgressTrackerData,
 ) {
-    Column(modifier = modifier.fillMaxWidth()) {
-
-        PeakBox(modifier = Modifier.fillMaxWidth()) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                CalendarProgressTracker(
-                    data = calendarData,
-                )
-                Spacer(modifier = Modifier.width(dimensionResource(R.dimen.spacing_sm)))
-                Column {
-                    DailyPeakMountain(
-                        modifier = Modifier.padding(end = dimensionResource(R.dimen.spacing_sm)),
-                        steps = steps,
-                        goal = goal,
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        PeakBox(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Column {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    CalendarProgressTracker(data = calendarData)
+                    Spacer(
+                        modifier = Modifier
+                            .width(dimensionResource(R.dimen.spacing_md))
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_md)))
-                    Text(
-                        text = stringResource(
-                            R.string.peak_steps_progress,
-                            formatStepsWithCommas(steps),
-                            formatStepsWithCommas(goal)
-                        ),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    Column {
+                        Text(
+                            text = stringResource(R.string.progress_today),
+                            style = MaterialTheme.typography.headlineSmall,
+                        )
+                        Text(
+                            text = "${formatStepsWithCommas(steps)} " +
+                                    "/ ${formatStepsWithCommas(goal)} steps",
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                    Spacer(
+                        modifier = Modifier
+                            .width(dimensionResource(R.dimen.spacing_md))
                     )
                 }
+                LinearWavyProgressIndicator(
+                    modifier = Modifier.fillMaxWidth(),
+                    progress = { (steps.toFloat() / goal.toFloat()) },
+                )
             }
+
         }
     }
 }

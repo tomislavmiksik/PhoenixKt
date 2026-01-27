@@ -14,7 +14,7 @@ import androidx.health.connect.client.request.AggregateGroupByPeriodRequest
 import androidx.health.connect.client.request.AggregateRequest
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
-import dev.tomislavmiksik.peak.core.domain.model.HealthSnapshot
+import dev.tomislavmiksik.peak.core.data.local.entity.HealthSnapshot
 import dev.tomislavmiksik.peak.core.domain.repository.HealthConnectRepository
 import java.time.Duration
 import java.time.Instant
@@ -91,7 +91,7 @@ class HealthConnectRepositoryImpl @Inject constructor(
         val sleep = getLatestSleep(yesterday, now)
 
         val heartRate = getLatestHeartRate(yesterday, now)
-        val weight = getLatestWeight(thirtyDaysAgo, now)
+        getLatestWeight(thirtyDaysAgo, now)
 
         return HealthSnapshot(
             date = LocalDate.now(),
@@ -108,7 +108,6 @@ class HealthConnectRepositoryImpl @Inject constructor(
             sleepStartTime = sleep?.startTime,
             sleepEndTime = sleep?.endTime,
             heartRate = heartRate ?: 0,
-            weight = weight ?: 0.0
         )
     }
 

@@ -29,7 +29,8 @@ fun ProgressScreen(
     modifier: Modifier = Modifier,
 ) {
     val pickMedia =
-        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uris ->
+        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+            uris ->
             // Callback is invoked after the user selects media items or closes the
             // photo picker.
             if (uris != null) {
@@ -46,20 +47,6 @@ fun ProgressScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        PeakBox {
-            IconButton(
-                onClick = {
-                    pickMedia.launch(
-                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                    )
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.PhotoLibrary,
-                    contentDescription = "picker"
-                )
-            }
-        }
         Text(
             text = stringResource(R.string.progress_title),
             style = MaterialTheme.typography.headlineLarge
